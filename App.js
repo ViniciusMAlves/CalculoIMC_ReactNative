@@ -11,6 +11,7 @@ const MyComponent = () => {
 
   async function calculaIMC(p, h) {
     calculo = parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) );    
+    setResultado(calculo);
 
     if (p > 0 && h > 0) {
       if (calculo < 18.5) {
@@ -30,8 +31,7 @@ const MyComponent = () => {
       setResultado(0)
       setRTexto("Preencha os valores corretamente!")
     }
-
-    setResultado(calculo);
+    
   }
 
   return (
