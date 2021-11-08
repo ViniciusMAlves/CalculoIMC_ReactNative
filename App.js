@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, TextInput, Button } from "react-native";
 
 export default function App() {
   const [altura, setAltura] = useState(0);
   const [peso, setPeso] = useState(0);
-  const [resultado, setResultado] = useState(0);
+  const [resultado, setResultado] = useState(0.00);
   const [RTexto, setRTexto] = useState("Digite os valores corretamente");
 
   async function calculaIMC() {
@@ -33,6 +33,7 @@ export default function App() {
           placeholder="Peso:"
           keyboardType="numeric"
           value={peso}
+          onChangeText={text => setPeso(parseFloat(text))}
           style={styles.input}
         />
 
@@ -41,11 +42,12 @@ export default function App() {
           placeholder="Altura:"
           keyboardType="numeric"
           value={altura}
+          onChangeText={text => setAltura(parseFloat(text))}
           style={styles.input}
         />
       </View>
       <Button style={styles.botao} title="Calcular" onPress={() => calculaIMC()} />
-      <Text style={styles.resultado}>{resultado}</Text>
+      <Text style={styles.resultado}>{resultado.toFixed(2)}</Text>
       <Text style={styles.resultado}>{RTexto}</Text>
     </View>
   );
@@ -65,9 +67,10 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     textAlign: "center",
-    width: "100%",
+    width: "95%",
     fontSize: 25,
-    marginTop: 10
+    marginTop: 10,
+    borderWidth: 1
   },
   resultado: {
     alignSelf: "center",
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
     padding: 0
   },
   botao: {
-    backgroundColor: "#00008B"
+    backgroundColor: "#00008B",
+    width: "95%",
   }
 });
