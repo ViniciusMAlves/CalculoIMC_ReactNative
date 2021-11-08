@@ -32,7 +32,7 @@ export default function App() {
       <View style={styles.entrada}>
         <TextInput
           autoCapitalize="none"
-          placeholder="Peso:"
+          placeholder="Peso(kg):"
           keyboardType="numeric"
           value={peso}
           onChangeText={text => setPeso(text)}
@@ -41,7 +41,7 @@ export default function App() {
 
         <TextInput
           autoCapitalize="none"
-          placeholder="Altura:"
+          placeholder="Altura(cm):"
           keyboardType="numeric"
           value={altura}
           onChangeText={text => setAltura(text)}
