@@ -5,7 +5,7 @@ export default function App() {
   const [altura, setAltura] = useState("");
   const [peso, setPeso] = useState("");
   const [resultado, setResultado] = useState(0.00);
-  const [RTexto, setRTexto] = useState("Digite os valores corretamente");
+  const [RTexto, setRTexto] = useState("");
 
   async function calculaIMC(p, h) {
     Alert.alert(resultado.toFixed(2));
