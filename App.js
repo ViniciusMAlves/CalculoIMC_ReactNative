@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button} from "react-native";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 
-export default function App() {  
+export default function App() {
   const [altura, setAltura] = useState(0);
-  const [peso, setPeso] = useState(0);   
+  const [peso, setPeso] = useState(0);
   const [resultado, setResultado] = useState(0);
   const [RTexto, setRTexto] = useState("Digite os valores corretamente");
 
-  calculaIMC(); {
-    setResultado(peso/(altura*altura));
+  async function calculaIMC() {
+    setResultado(peso / (altura * altura));
 
-    if(resultado < 18.5){
+    if (resultado < 18.5) {
       setRTexto("Abaixo do Peso");
-    }else if(resultado >= 18.5 && resultado <= 24.9){
+    } else if (resultado >= 18.5 && resultado <= 24.9) {
       setRTexto("Peso Normal");
-    }else if(resultado >= 25 && resultado <= 29.9){
+    } else if (resultado >= 25 && resultado <= 29.9) {
       setRTexto("Sobrepeso");
-    }else if(resultado >= 30 && resultado <= 34.9){
+    } else if (resultado >= 30 && resultado <= 34.9) {
       setRTexto("Obesidade Grau I");
-    }else if(resultado >= 35 && resultado <= 39.9){
+    } else if (resultado >= 35 && resultado <= 39.9) {
       setRTexto("Obesidade Grau II");
-    }else if(resultado >= 40){
+    } else if (resultado >= 40) {
       setRTexto("Obesidade Grau III ou Mórbida");
     }
   }
@@ -28,26 +28,26 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.entrada}>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Peso:"
-            keyboardType="numeric"
-            value = {peso}
-            style={styles.input}
-          />
+        <TextInput
+          autoCapitalize="none"
+          placeholder="Peso:"
+          keyboardType="numeric"
+          value={peso}
+          style={styles.input}
+        />
 
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Altura:"
-            keyboardType="numeric"
-            value= {altura}
-            style={styles.input}
-          />
-        </View>
-        <Button style={styles.botao} title="Calcular" onPress={() => calculaIMC()}/>   
-        <Text style={styles.resultado}>{resultado}</Text>
-        <Text style={styles.resultado}>{RTexto}</Text>   
-    </View>    
+        <TextInput
+          autoCapitalize="none"
+          placeholder="Altura:"
+          keyboardType="numeric"
+          value={altura}
+          style={styles.input}
+        />
+      </View>
+      <Button style={styles.botao} title="Calcular" onPress={() => calculaIMC()} />
+      <Text style={styles.resultado}>{resultado}</Text>
+      <Text style={styles.resultado}>{RTexto}</Text>
+    </View>
   );
 }
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     padding: 0
   },
-  botao:{
-    backgroundColor : "#00008B"
+  botao: {
+    backgroundColor: "#00008B"
   }
 });
