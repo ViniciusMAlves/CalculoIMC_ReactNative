@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 
 export default function App() {
-  const [altura, setAltura] = useState(0);
-  const [peso, setPeso] = useState(0);
+  const [altura, setAltura] = useState("");
+  const [peso, setPeso] = useState("");
   const [resultado, setResultado] = useState(0.00);
   const [RTexto, setRTexto] = useState("Digite os valores corretamente");
 
-  async function calculaIMC() {
-    setResultado(peso / (altura * altura));
+  async function calculaIMC(p, h) {
+    Alert.alert(resultado.toFixed(2));
+    setResultado(parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) ));
+    
 
     if (resultado < 18.5) {
       setRTexto("Abaixo do Peso");
@@ -33,7 +35,7 @@ export default function App() {
           placeholder="Peso:"
           keyboardType="numeric"
           value={peso}
-          onChangeText={text => setPeso(parseFloat(text))}
+          onChangeText={text => setPeso(text)}
           style={styles.input}
         />
 
@@ -42,11 +44,11 @@ export default function App() {
           placeholder="Altura:"
           keyboardType="numeric"
           value={altura}
-          onChangeText={text => setAltura(parseFloat(text))}
+          onChangeText={text => setAltura(text)}
           style={styles.input}
         />
       </View>
-      <Button style={styles.botao} title="Calcular" onPress={() => calculaIMC()} />
+      <Button style={styles.botao} title="Calcular" onPress={() => calculaIMC(peso, altura)} />
       <Text style={styles.resultado}>{resultado.toFixed(2)}</Text>
       <Text style={styles.resultado}>{RTexto}</Text>
     </View>
