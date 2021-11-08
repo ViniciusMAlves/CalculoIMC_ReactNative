@@ -1,87 +1,98 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
+import * as React from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 
-export default function App() {
-  const [altura, setAltura] = useState("");
-  const [peso, setPeso] = useState("");
-  const [resultado, setResultado] = useState(0.00);
-  const [RTexto, setRTexto] = useState("");
+const MyComponent = () => {
+  const [altura, setAltura] = React.useState('');
+  const [peso, setPeso] = React.useState('');
+  const [resultado, setResultado] = React.useState(0);
+  const [RTexto, setRTexto] = React.useState('');
+
 
   async function calculaIMC(p, h) {
-    setResultado(parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) ));
-    
+    calculo = parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) );    
 
-    if (resultado < 18.5) {
-      setRTexto("Abaixo do Peso");
-    } else if (resultado >= 18.5 && resultado <= 24.9) {
-      setRTexto("Peso Normal");
-    } else if (resultado >= 25 && resultado <= 29.9) {
-      setRTexto("Sobrepeso");
-    } else if (resultado >= 30 && resultado <= 34.9) {
-      setRTexto("Obesidade Grau I");
-    } else if (resultado >= 35 && resultado <= 39.9) {
-      setRTexto("Obesidade Grau II");
-    } else if (resultado >= 40) {
-      setRTexto("Obesidade Grau III ou Mórbida");
+    if (p > 0 && h > 0) {
+      if (calculo < 18.5) {
+        setRTexto("Considerado como: Abaixo do Peso");
+      } else if (calculo >= 18.5 && calculo <= 24.9) {
+        setRTexto("Considerado como: Peso Normal");
+      } else if (calculo >= 25 && calculo <= 29.9) {
+        setRTexto("Considerado como: Sobrepeso");
+      } else if (calculo >= 30 && calculo <= 34.9) {
+        setRTexto("Considerado como: Obesidade Grau I");
+      } else if (calculo >= 35 && calculo <= 39.9) {
+        setRTexto("Considerado como: Obesidade Grau II");
+      } else if (calculo >= 40) {
+        setRTexto("Considerado como: Obesidade Grau III ou Mórbida");
+      }
+    } else {
+      setResultado(0)
+      setRTexto("Preencha os valores corretamente!")
     }
+
+    setResultado(calculo);
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.entrada}>
-        <TextInput
-          autoCapitalize="none"
-          placeholder="Peso(kg):"
-          keyboardType="numeric"
-          value={peso}
-          onChangeText={text => setPeso(text)}
-          style={styles.input}
-        />
+      <TextInput
+        mode="outlined"
+        autoCapitalize="none"
+        label="Altura(cm)"
+        textAlign="center"
+        keyboardType="numeric"
+        activeOutlineColor="orange"
+        value={altura}
+        onChangeText={text => setAltura(text)}
+        style={styles.input}
+      />
 
-        <TextInput
-          autoCapitalize="none"
-          placeholder="Altura(cm):"
-          keyboardType="numeric"
-          value={altura}
-          onChangeText={text => setAltura(text)}
-          style={styles.input}
-        />
+      <TextInput
+        mode="outlined"
+        label="Peso(kg)"
+        autoCapitalize="none"
+        keyboardType="numeric"
+        activeOutlineColor="orange"
+        value={peso}
+        onChangeText={peso => setPeso(peso)}
+        style={styles.input}
+      />
+      <Button style={styles.button} mode="contained" color="orange" onPress={() => calculaIMC(peso, altura)}>
+        CALCULAR
+      </Button>
+
+      <View style={styles.result}>
+        <Text>Seu IMC é: {resultado.toFixed(2)}</Text>
+        <Text>{RTexto}</Text>
       </View>
-      <Button style={styles.botao} title="Calcular" onPress={() => calculaIMC(peso, altura)} />
-      <Text style={styles.resultado}>{resultado.toFixed(2)}</Text>
-      <Text style={styles.resultado}>{RTexto}</Text>
     </View>
   );
-}
+};
+
+export default MyComponent;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
-  },
-  entrada: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
+
   },
   input: {
     height: 50,
-    textAlign: "center",
-    width: "95%",
-    fontSize: 25,
-    marginTop: 10,
-    borderWidth: 1
-  },
-  resultado: {
-    alignSelf: "center",
-    color: "black",
     fontSize: 20,
-    fontWeight: "bold",
-    padding: 0
+    margin: 5
   },
-  botao: {
-    backgroundColor: "#00008B",
-    width: "95%",
+  button: {
+    marginTop: 10,
+    width: "75%",
+    height: 40,
+    alignSelf: "center",
+    justifyContent: "center",
+  },
+  result: {
+    marginTop: 10,
+    alignItems: "center",
   }
 });
