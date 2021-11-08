@@ -8,7 +8,6 @@ export default function App() {
   const [RTexto, setRTexto] = useState("");
 
   async function calculaIMC(p, h) {
-    Alert.alert(resultado.toFixed(2));
     setResultado(parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) ));
     
 
