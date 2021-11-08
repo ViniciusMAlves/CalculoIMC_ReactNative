@@ -5,13 +5,13 @@ import { TextInput, Button } from 'react-native-paper';
 const MyComponent = () => {
   const [altura, setAltura] = React.useState('');
   const [peso, setPeso] = React.useState('');
-  const [resultado, setResultado] = React.useState(0);
+  const [resultado, setResultado] = React.useState('');
   const [RTexto, setRTexto] = React.useState('');
 
 
   async function calculaIMC(p, h) {
-    calculo = parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) );    
-    setResultado(calculo);
+    var calculo = parseFloat(p) / ( (parseFloat(h)/100) * (parseFloat(h)/100) );    
+    setResultado('Seu IMC é: ' +calculo.toFixed(2));
 
     if (p > 0 && h > 0) {
       if (calculo < 18.5) {
@@ -28,7 +28,7 @@ const MyComponent = () => {
         setRTexto("Considerado como: Obesidade Grau III ou Mórbida");
       }
     } else {
-      setResultado(0)
+      setResultado('')
       setRTexto("Preencha os valores corretamente!")
     }
     
@@ -63,7 +63,7 @@ const MyComponent = () => {
       </Button>
 
       <View style={styles.result}>
-        <Text>Seu IMC é: {resultado.toFixed(2)}</Text>
+        <Text>{resultado}</Text>
         <Text>{RTexto}</Text>
       </View>
     </View>
